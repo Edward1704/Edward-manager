@@ -63,17 +63,37 @@
         </div>
     </section>
 
-    <!-- Форма заявки -->
-    <section id="contact" class="contact">
-        <h2>Оставьте заявку</h2>
-        <p>Заполните форму ниже, и мы свяжемся с вами в ближайшее время!</p>
-        <form action="https://api.whatsapp.com/send?phone=77087395626" method="get" target="_blank">
-            <input type="text" name="name" placeholder="Ваше имя" required>
-            <input type="email" name="email" placeholder="Ваш email" required>
-            <textarea name="message" rows="4" placeholder="Ваше сообщение" required></textarea>
-            <button type="submit">Отправить</button>
-        </form>
-    </section>
+   <!-- Форма заявки -->
+<section id="contact" class="contact">
+    <h2>Оставьте заявку</h2>
+    <p>Заполните форму ниже, и мы свяжемся с вами в ближайшее время!</p>
+    <form id="contactForm" onsubmit="sendToWhatsApp(event)">
+        <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+        <input type="email" id="email" name="email" placeholder="Ваш email" required>
+        <textarea id="message" name="message" rows="4" placeholder="Ваше сообщение" required></textarea>
+        <button type="submit">Отправить</button>
+    </form>
+</section>
+
+<script>
+function sendToWhatsApp(event) {
+    event.preventDefault(); // Останавливает стандартное поведение формы
+
+    // Получаем значения полей формы
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    // Формируем текст сообщения
+    const whatsappMessage = `Имя: ${encodeURIComponent(name)}\nEmail: ${encodeURIComponent(email)}\nСообщение: ${encodeURIComponent(message)}`;
+
+    // Формируем ссылку для WhatsApp API
+    const whatsappURL = `https://api.whatsapp.com/send?phone=77087395626&text=${whatsappMessage}`;
+
+    // Открываем ссылку в новой вкладке
+    window.open(whatsappURL, '_blank');
+}
+</script>
 
     <!-- Футер -->
     <footer class="footer">
